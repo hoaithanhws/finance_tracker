@@ -1,3 +1,4 @@
+import logging
 import os
 
 from dotenv import load_dotenv
@@ -10,9 +11,17 @@ from app.routers import auth, categories, transactions
 
 load_dotenv()
 
-Base.metadata.create_all(bind=engine)
+logger = logging.getLogger(__name__)
 
 app = FastAPI(title="Personal Finance Tracker API", version="1.0.0")
+
+
+@app.on_event("startup")
+def startup():
+    try:
+        Base.metadata.create_all(bind=engine)
+    except Exception as e:
+        logger.error(f"Could not create tables: {e}")
 
 frontend_url = os.getenv("FRONTEND_URL", "http://localhost:5173")
 
