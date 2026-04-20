@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-# finance_tracker
-=======
+
 # Personal Finance Tracker
 
 Ứng dụng quản lý thu chi cá nhân — full-stack với FastAPI + React.
